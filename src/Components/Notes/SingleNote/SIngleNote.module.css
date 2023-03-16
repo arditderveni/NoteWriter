@@ -1,0 +1,22 @@
+.note {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.note h3 {
+  margin: 0 0 0 0.25rem 0;
+}
+
+.content {
+  font-style: italic;
+}
+
+.tag {
+  margin-top: 0.25rem;
+  font-weight: bold;
+  color: black;
+  font-size: 1.25rem;
+}

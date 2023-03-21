@@ -7,16 +7,52 @@
 }
 
 .note h3 {
-  margin: 0 0 0 0.25rem 0;
+  margin-top: 0.25rem;
+  width: 20rem;
+  padding: o;
+  margin-left: 1rem;
 }
 
 .content {
   font-style: italic;
+  width: 45rem;
+  padding: 0;
 }
 
 .tag {
+  width: 20;
   margin-top: 0.25rem;
   font-weight: bold;
   color: black;
   font-size: 1.25rem;
+  padding: 0;
+}
+
+.buttons {
+  width: 15rem;
+  display: flex;
+  justify-content: center;
+
+  /* padding-bottom: 1rem; */
+}
+
+.buttons button {
+  margin-top: 0.25rem;
+  width: 100%;
+  padding: 0;
+  margin-left: 2rem;
+  height: 1.5rem;
+  width: 4rem;
+  border-radius: 5px;
+  color: white;
+}
+
+.delete {
+  border-color: red;
+  background-color: red;
+}
+
+.edit {
+  border-color: black;
+  background-color: #0a1627;
 }

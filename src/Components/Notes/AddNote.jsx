@@ -1,77 +1,123 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "../UI/Modal";
 import classes from "./AddNote.module.css";
 
 const AddNote = (props) => {
-  const [newNote, setNewNote] = useState({
-    newTitle: "",
-    newCategory: "",
-    newContent: "",
-  });
+  const defaultNewNote = {
+    title: "",
+    category: "",
+    content: "",
+  };
+  const [formIsValid, setFormIsValid] = useState(false);
+  const [titleIsValid, setTitleIsValid] = useState();
+  const [categoryIsValid, setCategoryIsValid] = useState();
+  const [contentIsValid, setContentIsValid] = useState();
 
-  // const handleTitle = (e, title) =>
-  //   setNewNote({
-  //     ...newNote,
-  //     [title]: e.target.value,
-  //   });
-
-  // const handleCategory = (e, category) =>
-  //   setNewNote({
-  //     ...newNote,
-  //     [category]: e.target.value,
-  //   });
-
-  // const handleContent = (e, content) => {
-  //   setNewNote({
-  //     ...newNote,
-  //     [content]: e.target.value,
-  //   });
-  // };
+  const [newNote, setNewNote] = useState(props?.note ?? defaultNewNote);
 
   const handleNote = (e, field) => {
-    console.log("asdsad");
     setNewNote({
       ...newNote,
       [field]: e.target.value,
     });
   };
-  console.log({ newNote });
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!formIsValid) {
+      return;
+    }
+
     props.onAddNote(newNote);
     props.onClose(false);
+    // props.onHideEditModal(false);
     setNewNote("");
   };
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      setFormIsValid(
+        newNote.title !== "" &&
+          newNote.category !== "" &&
+          newNote.content !== ""
+      );
+    }, 500);
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [newNote]);
+
+  const validTitleHandler = () => {
+    setTitleIsValid(newNote.title !== "");
+  };
+
+  const validCategoryHandler = () => {
+    setCategoryIsValid(newNote.category !== "");
+  };
+
+  const validContentHandler = () => {
+    setContentIsValid(newNote.content !== "");
+  };
+
   return (
     <Modal onClose={props.onClose}>
       <div className={classes.input}>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="newTitle">Title</label>
-          <input
-            id="newTitle"
-            type="text"
-            onChange={(e) => handleNote(e, "newTitle")}
-          ></input>
-
-          <label htmlFor="newCategory">Category</label>
-          <select
-            id="newCategory"
-            onChange={(e) => handleNote(e, "newCategory")}
+          <div
+            className={`${classes.input} ${
+              titleIsValid === false ? classes.invalid : ""
+            }`}
           >
-            <option value="fun">Fun</option>
-            <option value="chores">Chores</option>
-            <option value="thoughts">Thoughts</option>
-          </select>
-
-          <label htmlFor="newNote">Note</label>
-          <textarea
-            id="newNote"
-            onChange={(e) => handleNote(e, "newContent")}
-          ></textarea>
-
-          <button type="submit" className={classes.button}>
-            Add
-          </button>
+            <label htmlFor="title">Title</label>
+            <input
+              id="title"
+              type="text"
+              value={newNote?.title}
+              onChange={(e) => handleNote(e, "title")}
+              onBlur={validTitleHandler}
+            ></input>
+          </div>
+          <div
+            className={`${classes.input} ${
+              categoryIsValid === false ? classes.invalid : ""
+            }`}
+          >
+            <label htmlFor="category">Category</label>
+            <select
+              id="category"
+              value={newNote?.category}
+              onBlur={validCategoryHandler}
+              onChange={(e) => handleNote(e, "category")}
+            >
+              <option value=""></option>
+              <option value="fun">Fun</option>
+              <option value="chores">Chores</option>
+              <option value="thoughts">Thoughts</option>
+            </select>
+          </div>
+          <div
+            className={`${classes.input} ${
+              contentIsValid === false ? classes.invalid : ""
+            }`}
+          >
+            <label htmlFor="content">Note</label>
+            <textarea
+              id="content"
+              value={newNote?.content}
+              onBlur={validContentHandler}
+              onChange={(e) => handleNote(e, "content")}
+            ></textarea>
+          </div>
+          <div className={classes.actions}>
+            <button
+              type="submit"
+              className={classes.button}
+              disabled={!formIsValid}
+            >
+              Confirm
+            </button>
+          </div>
         </form>
       </div>
     </Modal>

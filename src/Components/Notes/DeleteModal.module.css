@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 1rem;
+  font: 1rem;
+}
+
+.button-delete {
+  width: 7rem;
+  height: 2rem;
+  background-color: red;
+  color: white;
+  font-size: 20px;
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 0;
+  margin-left: 5rem;
+}
+
+.button-cancel {
+  width: 7rem;
+  height: 2rem;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  border-color: black;
+  background-color: #0a1627;
+  padding: 0;
+  margin-right: 5rem;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}

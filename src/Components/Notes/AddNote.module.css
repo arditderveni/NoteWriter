@@ -1,5 +1,5 @@
 .input {
-  margin: 2rem auto;
+  margin: auto;
   padding: 1rem;
   width: 90%;
   max-width: 40rem;
@@ -50,7 +50,31 @@
   padding: 0.75rem 3rem;
 }
 
-.button:hover,
-.button:active {
-  background-color: #030625;
+.actions {
+  text-align: center;
+}
+
+.button:disabled,
+.button:focus:disabled,
+.button:hover:disabled,
+.button:active:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.input.invalid input {
+  border-color: red;
+  background-color: #ffcdd2;
+}
+
+.input.invalid select {
+  border-color: red;
+  background-color: #ffcdd2;
+}
+
+.input.invalid textarea {
+  border-color: red;
+  background-color: #ffcdd2;
 }
